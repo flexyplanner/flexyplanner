@@ -1,0 +1,23 @@
+import { Router } from "express";
+import Joi from "joi";
+import tryCatchWrapper from "../helpers/function-helpers/try-catch-wrapper";
+import validate from "../helpers/function-helpers/validate";
+import { authorize } from "../auth/auth.controller";
+import { checkDailyRate } from "../REST-entities/day/day.controller";
+import { findProducts } from "./product-search.controller";
+
+const searchQuerySchema = Joi.object({
+  search: Joi.string().min(1).max(30).required(),
+});
+
+const router = Router();
+console.log("markup GET");
+router.get(
+  "/",
+  // tryCatchWrapper(authorize),
+  // tryCatchWrapper(checkDailyRate),
+  // validate(searchQuerySchema, "query"),
+  tryCatchWrapper(findProducts)
+);
+
+export default router;
