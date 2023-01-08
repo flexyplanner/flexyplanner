@@ -14,7 +14,7 @@ export const findProducts = async (req: Request, res: Response) => {
 };
 
 export const switchMarkupStatus = async (req: Request, res: Response) => {
-  const foundProducts = await MarkupModel.updateMany({}, [{$set:{is_Active:{$eq:[false,"$is_Active"]}}}]);
+  const foundProducts = await MarkupModel.updateMany({}, [{$set:{is_Active:{$eq:[false,"$is_Active"]}}}]).lean();
   if (!foundProducts) {
     return res
         .status(400)
