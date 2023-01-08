@@ -3,7 +3,7 @@
   "info": {
     "version": "2.0.0",
     "title": "Flexyplanner API docs",
-    "description": "API documentation for GoIT project 'Flexyplanner'. [Backend github repository](https://github.com/DanTsvirkun/slimmom-backend)",
+    "description": "API documentation for GoIT project 'Flexyplanner'. [Backend github repository](https://github.com/flexyplanner/flexyplanner.git)",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
