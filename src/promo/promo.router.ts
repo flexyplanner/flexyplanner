@@ -12,7 +12,7 @@ import {authorize} from "../auth/auth.controller";
 const router = Router();
 
 router.post("/",
-    // tryCatchWrapper(authorize),
+    tryCatchWrapper(authorize),
     tryCatchWrapper(createPromo)
 );
 router.get("/",

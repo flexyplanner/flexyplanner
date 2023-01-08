@@ -4,14 +4,14 @@ import tryCatchWrapper from "../helpers/function-helpers/try-catch-wrapper";
 import validate from "../helpers/function-helpers/validate";
 import { authorize } from "../auth/auth.controller";
 import { checkDailyRate } from "../REST-entities/day/day.controller";
-import { findProducts } from "./product-search.controller";
+import { findProducts,switchMarkupStatus,switchMarkupModify } from "./product-search.controller";
+import {switchPromoStatus} from "../promo/promo.controller";
 
 const searchQuerySchema = Joi.object({
   search: Joi.string().min(1).max(30).required(),
 });
 
 const router = Router();
-console.log("markup GET");
 router.get(
   "/",
   // tryCatchWrapper(authorize),
@@ -19,5 +19,12 @@ router.get(
   // validate(searchQuerySchema, "query"),
   tryCatchWrapper(findProducts)
 );
+
+router.patch("/",
+    tryCatchWrapper(switchMarkupStatus)
+)
+router.post("/",
+    tryCatchWrapper(switchMarkupModify)
+)
 
 export default router;

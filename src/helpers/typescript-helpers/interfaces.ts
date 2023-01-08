@@ -73,7 +73,7 @@ export interface IJWTPayload {
 export interface IMarkup extends Document {
   type: string,
   markup: string,
-  data: { price: number },
+  data: { price: number, preOrderPrice: number | null },
   is_Active: boolean
 }
 
