@@ -23,7 +23,7 @@ router.get(
 router.patch("/",
     tryCatchWrapper(switchMarkupStatus)
 )
-router.post("/",
+router.put("/",
     tryCatchWrapper(switchMarkupModify)
 )
 

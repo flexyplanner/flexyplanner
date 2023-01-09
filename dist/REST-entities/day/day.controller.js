@@ -13,107 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkDailyRate = exports.getDayInfo = exports.deleteProduct = exports.addProduct = void 0;
-const uuid_1 = require("uuid");
 const user_model_1 = __importDefault(require("../user/user.model"));
-const product_model_1 = __importDefault(require("../product/product.model"));
 const summary_model_1 = __importDefault(require("../summary/summary.model"));
 const day_model_1 = __importDefault(require("./day.model"));
 const addProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { date, productId, weight } = req.body;
-    const product = yield product_model_1.default.findById(productId);
-    if (!product) {
-        return res.status(404).send({ message: "Product not found" });
-    }
-    yield user_model_1.default.findById(req.user._id)
-        .populate("days")
-        .exec((err, data) => __awaiter(void 0, void 0, void 0, function* () {
-        if (err) {
-            next(err);
-        }
-        const existingDay = data.days.find((day) => day.date === date);
-        const kcalCoefficient = product.calories / product.weight;
-        const kcalConsumed = kcalCoefficient * weight;
-        const eatenProduct = {
-            title: product.title.ru,
-            weight,
-            kcal: kcalConsumed,
-            id: (0, uuid_1.v4)(),
-        };
-        if (existingDay) {
-            existingDay.eatenProducts.push(eatenProduct);
-            yield existingDay.save();
-            const daySummary = yield summary_model_1.default.findOne({
-                $and: [{ date: date }, { userId: req.user._id }],
-            });
-            daySummary.kcalLeft -= kcalConsumed;
-            daySummary.kcalConsumed += kcalConsumed;
-            daySummary.percentsOfDailyRate =
-                (daySummary.kcalConsumed * 100) /
-                    req.user.userData.dailyRate;
-            if (daySummary.kcalLeft < 0) {
-                daySummary.kcalLeft = 0;
-                daySummary.percentsOfDailyRate = 100;
-            }
-            yield daySummary.save();
-            return res.status(201).send({
-                eatenProduct,
-                day: {
-                    id: existingDay._id,
-                    eatenProducts: existingDay.eatenProducts,
-                    date: existingDay.date,
-                    daySummary: existingDay.daySummary,
-                },
-                daySummary: {
-                    date: daySummary.date,
-                    kcalLeft: daySummary.kcalLeft,
-                    kcalConsumed: daySummary.kcalConsumed,
-                    dailyRate: daySummary.dailyRate,
-                    percentsOfDailyRate: daySummary
-                        .percentsOfDailyRate,
-                    userId: daySummary.userId,
-                    id: daySummary._id,
-                },
-            });
-        }
-        const newSummary = yield summary_model_1.default.create({
-            date,
-            kcalLeft: req.user.userData.dailyRate - kcalConsumed,
-            kcalConsumed,
-            dailyRate: req.user.userData.dailyRate,
-            percentsOfDailyRate: (kcalConsumed * 100) / req.user.userData.dailyRate,
-            userId: req.user._id,
-        });
-        if (newSummary.kcalLeft < 0) {
-            newSummary.kcalLeft = 0;
-            newSummary.percentsOfDailyRate = 100;
-            yield newSummary.save();
-        }
-        const newDay = yield day_model_1.default.create({
-            date,
-            eatenProducts: [eatenProduct],
-            daySummary: newSummary._id,
-        });
-        req.user.days.push(newDay._id);
-        yield req.user.save();
-        return res.status(201).send({
-            eatenProduct,
-            newDay: {
-                id: newDay._id,
-                eatenProducts: newDay.eatenProducts,
-                date: newDay.date,
-                daySummary: newDay.daySummary,
-            },
-            newSummary: {
-                date: newSummary.date,
-                kcalLeft: newSummary.kcalLeft,
-                kcalConsumed: newSummary.kcalConsumed,
-                dailyRate: newSummary.dailyRate,
-                percentsOfDailyRate: newSummary.percentsOfDailyRate,
-                userId: newSummary.userId,
-                id: newSummary._id,
-            },
-        });
-    }));
+    return res.status(201).send("addProduct");
 });
 exports.addProduct = addProduct;
 const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

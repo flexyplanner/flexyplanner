@@ -24,10 +24,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const productSchema = new mongoose_1.Schema({
+const promoSchema = new mongoose_1.Schema({
+    discount: Number,
     type: String,
-    markup: String,
-    data: { price: Number, preOrderPrice: Number },
-    is_Active: Boolean
+    promo: String,
+    period: { from: String, to: String },
+    isUsing: Boolean
 });
-exports.default = mongoose_1.default.model("Markup", productSchema);
+exports.default = mongoose_1.default.model("Promocodes", promoSchema);

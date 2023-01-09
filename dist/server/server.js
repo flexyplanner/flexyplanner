@@ -23,6 +23,7 @@ const daily_rate_router_1 = __importDefault(require("../daily-rate/daily-rate.ro
 const product_search_router_1 = __importDefault(require("../product-search/product-search.router"));
 const day_router_1 = __importDefault(require("../REST-entities/day/day.router"));
 const user_router_1 = __importDefault(require("../REST-entities/user/user.router"));
+const promo_router_1 = __importDefault(require("../promo/promo.router"));
 const swaggerDocument = require("../../swagger.json");
 class Server {
     constructor() {
@@ -67,8 +68,9 @@ class Server {
     initRoutes() {
         this.app.use("/auth", auth_router_1.default);
         this.app.use("/daily-rate", daily_rate_router_1.default);
-        this.app.use("/product", product_search_router_1.default);
+        this.app.use("/markup", product_search_router_1.default);
         this.app.use("/day", day_router_1.default);
+        this.app.use("/promo", promo_router_1.default);
         this.app.use("/user", user_router_1.default);
         this.app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
     }

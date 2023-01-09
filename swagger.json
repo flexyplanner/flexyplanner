@@ -344,7 +344,7 @@
       },
       "post": {
         "tags": ["Mark Up"],
-        "summary": "delete and create new markup from data:{price: xxx, preOrderPrice: xxx}",
+        "summary": "update markup from data:{price: xxx, preOrderPrice: xxx}",
         "requestBody": {
           "description": "Switch isActive to true or false",
           "required": true,

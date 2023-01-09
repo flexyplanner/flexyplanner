@@ -25,14 +25,8 @@ export const switchMarkupStatus = async (req: Request, res: Response) => {
 };
 export const switchMarkupModify = async (req: Request, res: Response) => {
   const {body} = req;
-  const foundProducts = await MarkupModel.findOne({type: body.type}).lean();
-  const new_Products ={
-    ...foundProducts,
-    ...body.change
-  }
-  const deleteProduct = await MarkupModel.findOneAndDelete({_id: foundProducts?._id})
-  const createProduct = await MarkupModel.create(new_Products);
+  const foundProducts = await MarkupModel.findOneAndUpdate({type: body.type},{data: {...body.data}},{new:true}).lean();
   return res
       .status(200)
-      .send(createProduct);
+      .send(foundProducts);
 }

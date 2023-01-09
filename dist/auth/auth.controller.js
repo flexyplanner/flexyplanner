@@ -31,16 +31,6 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         username,
         email,
         passwordHash,
-        userData: {
-            weight: 0,
-            height: 0,
-            age: 0,
-            bloodType: 0,
-            desiredWeight: 0,
-            dailyRate: 0,
-            notAllowedProducts: [],
-        },
-        days: [],
     });
     return res.status(201).send({
         email,
@@ -113,12 +103,15 @@ const authorize = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     const authorizationHeader = req.get("Authorization");
     if (authorizationHeader) {
         const accessToken = authorizationHeader.replace("Bearer ", "");
+        console.log(accessToken);
+        console.log(process.env.JWT_ACCESS_SECRET);
         let payload;
         try {
             payload = jsonwebtoken_1.default.verify(accessToken, process.env.JWT_ACCESS_SECRET);
+            console.log(payload);
         }
         catch (err) {
-            return res.status(401).send({ message: "Unauthorized" });
+            return res.status(401).send({ message: "Unauthorized", err: err });
         }
         const user = yield user_model_1.default.findById(payload.uid);
         const session = yield session_model_1.default.findById(payload.sid);
