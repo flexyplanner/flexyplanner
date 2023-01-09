@@ -23,7 +23,7 @@ export const switchMarkupStatus = async (req: Request, res: Response) => {
 
   return res.status(200).send(foundProducts);
 };
-export const switchMarkupModify = async (req: Request, res: Response) => {
+export const markupModify = async (req: Request, res: Response) => {
   const {body} = req;
   const foundProducts = await MarkupModel.findOneAndUpdate({type: body.type},{data: {...body.data}},{new:true}).lean();
   return res

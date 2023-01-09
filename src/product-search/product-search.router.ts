@@ -4,7 +4,7 @@ import tryCatchWrapper from "../helpers/function-helpers/try-catch-wrapper";
 import validate from "../helpers/function-helpers/validate";
 import { authorize } from "../auth/auth.controller";
 import { checkDailyRate } from "../REST-entities/day/day.controller";
-import { findProducts,switchMarkupStatus,switchMarkupModify } from "./product-search.controller";
+import { findProducts,switchMarkupStatus,markupModify } from "./product-search.controller";
 import {switchPromoStatus} from "../promo/promo.controller";
 
 const searchQuerySchema = Joi.object({
@@ -24,7 +24,7 @@ router.patch("/",
     tryCatchWrapper(switchMarkupStatus)
 )
 router.put("/",
-    tryCatchWrapper(switchMarkupModify)
+    tryCatchWrapper(markupModify)
 )
 
 export default router;
