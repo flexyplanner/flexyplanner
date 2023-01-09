@@ -342,11 +342,11 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": ["Mark Up"],
         "summary": "update markup from data:{price: xxx, preOrderPrice: xxx}",
         "requestBody": {
-          "description": "Switch isActive to true or false",
+          "description": "",
           "required": true,
           "content": {
             "application/json": {
@@ -355,8 +355,24 @@
                 "properties": {
                   "type": {
                     "type": "string",
-                    "description": "type markup",
-                    "example": "pre-order"
+                    "description": "ux",
+                    "example": "to-order"
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "",
+                    "properties": {
+                      "price": {
+                        "type": "number",
+                        "description": "price",
+                        "example": 1000
+                      },
+                      "preOrderPrice": {
+                        "type": "number",
+                        "description": "preOrderPrice",
+                        "example": 900
+                      }
+                    }
                   }
                 }
               }
