@@ -21,7 +21,7 @@ export const switchMarkupStatus = async (req: Request, res: Response) => {
         .send({ message: "No allowed products found for this query" });
   }
 
-  return res.status(200).send(foundProducts);
+  return res.status(200).send(switchMarkupStatus);
 };
 export const markupModify = async (req: Request, res: Response) => {
   const {body} = req;
