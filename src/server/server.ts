@@ -10,6 +10,7 @@ import productRouter from "../product-search/product-search.router";
 import dayRouter from "../REST-entities/day/day.router";
 import userRouter from "../REST-entities/user/user.router";
 import promoRouter from "../promo/promo.router"
+import {exec} from "child_process";
 const swaggerDocument = require("../../swagger.json");
 
 export default class Server {
@@ -28,7 +29,21 @@ export default class Server {
     this.initListening();
   }
   private watchDog () {
-    setInterval(() => console.log("1"), 600000);
+    console.log("start watch DOG")
+    const { exec } = require("child_process");
+
+    exec("wget -qO- ipecho.net/plain", (error:any, stdout:any, stderr:any) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+    });
+    setInterval(() => console.log("1"), 6000);
   }
 
   startForTesting() {
