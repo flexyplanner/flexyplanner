@@ -20,11 +20,15 @@ export default class Server {
   }
 
   async start() {
+    this.watchDog();
     this.initMiddlewares();
     await this.initDbConnection();
     this.initRoutes();
     this.initErrorHandling();
     this.initListening();
+  }
+  private watchDog () {
+    setInterval(() => console.log("1"), 600000);
   }
 
   startForTesting() {
