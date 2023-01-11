@@ -31,7 +31,6 @@ export default class Server {
   private watchDog () {
     console.log("start watch DOG")
     const { exec } = require("child_process");
-
     exec("wget -qO- ipecho.net/plain", (error:any, stdout:any, stderr:any) => {
       if (error) {
         console.log(`error: ${error.message}`);
@@ -43,7 +42,7 @@ export default class Server {
       }
       console.log(`stdout: ${stdout}`);
     });
-    setInterval(() => console.log("1"), 6000);
+    setInterval((stdout) => console.log(stdout), 600000);
   }
 
   startForTesting() {
