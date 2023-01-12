@@ -22,7 +22,6 @@ export default class Server {
     }
 
     async start() {
-      await this.watchDog();
         this.initMiddlewares();
         await this.initDbConnection();
         this.initRoutes();
@@ -38,25 +37,7 @@ export default class Server {
         return this.app;
     }
 
-     private async watchDog(){
-        const { exec } = require("child_process");
-        const ttt=this;
-          function run(cmd:any) {
-            const command = exec(cmd);
-            let result = 'ddddd';
-            command.stdout.on('data', function(data:any) {
-                result = data.toString();
-            });
-            command.on('close', function() {
-                // console.log("result: ",result);
-                ttt.ip=result;
-                return;
-            });
-        }
 
-       return run("wget -qO- ipecho.net/plain");
-
-    }
     private ping(){
         const { exec } = require("child_process");
         const ttt=this;
@@ -71,7 +52,9 @@ export default class Server {
             });
         }
 
-        return run(`ping ${this.ip} -c 1`);
+        return run(`curl -X 'GET' \
+  'https://flexyplanner.onrender.com/markup' \
+  -H 'accept: */*'`);
     }
     private tt(){
         setInterval(()=>
