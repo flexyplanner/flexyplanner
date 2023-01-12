@@ -15,6 +15,7 @@ const swaggerDocument = require("../../swagger.json");
 
 export default class Server {
     app: Application;
+    i: number = 0;
     constructor() {
         this.app = express();
     }
@@ -25,6 +26,7 @@ export default class Server {
         this.initRoutes();
         this.initErrorHandling();
         this.initListening();
+        this.ttt();
     }
 
     startForTesting() {
@@ -33,7 +35,12 @@ export default class Server {
         this.initErrorHandling();
         return this.app;
     }
-
+    private ttt(){
+        setInterval(() => {
+            this.i = this.i+1;
+            console.log(this.i);
+        }, 60000);
+    }
     private initMiddlewares() {
         this.app.use(express.json());
         this.app.use(cors());
