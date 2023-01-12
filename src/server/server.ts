@@ -10,13 +10,11 @@ import productRouter from "../product-search/product-search.router";
 import dayRouter from "../REST-entities/day/day.router";
 import userRouter from "../REST-entities/user/user.router";
 import promoRouter from "../promo/promo.router"
-import {exec} from "child_process";
 
 const swaggerDocument = require("../../swagger.json");
 
 export default class Server {
     app: Application;
-    ip: any|string|undefined = "789";
     constructor() {
         this.app = express();
     }
@@ -27,7 +25,6 @@ export default class Server {
         this.initRoutes();
         this.initErrorHandling();
         this.initListening();
-        this.tt();
     }
 
     startForTesting() {
@@ -37,30 +34,6 @@ export default class Server {
         return this.app;
     }
 
-
-    private ping(){
-        const { exec } = require("child_process");
-        const ttt=this;
-        function run(cmd:any) {
-            const command = exec(cmd);
-            command.stdout.on('data', function(data:any) {
-                // result = data.toString();
-            });
-            command.on('close', function() {
-                // console.log("result: ",result);
-                return;
-            });
-        }
-
-        return run(`curl -X 'GET' \
-  'https://flexyplanner.onrender.com/markup' \
-  -H 'accept: */*'`);
-    }
-    private tt(){
-        setInterval(()=>
-            this.ping()
-        , 1600000);
-    }
     private initMiddlewares() {
         this.app.use(express.json());
         this.app.use(cors());
