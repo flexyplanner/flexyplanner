@@ -183,7 +183,9 @@ export const refreshTokens = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {
+
   const currentSession = req.session;
+  console.log(currentSession);
   await SessionModel.deleteOne({ _id: (currentSession as ISession)._id });
   return res.status(204).end();
 };

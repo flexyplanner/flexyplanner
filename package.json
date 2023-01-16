@@ -29,6 +29,7 @@
   "homepage": "https://github.com/DanTsvirkun/slimmom-backend#readme",
   "dependencies": {
     "@types/uuid": "^8.3.0",
+    "axios": "^1.2.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

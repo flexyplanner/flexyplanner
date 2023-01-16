@@ -10,6 +10,7 @@ import productRouter from "../product-search/product-search.router";
 import dayRouter from "../REST-entities/day/day.router";
 import userRouter from "../REST-entities/user/user.router";
 import promoRouter from "../promo/promo.router"
+import crmRouter from "../crm/crm.router"
 
 const swaggerDocument = require("../../swagger.json");
 
@@ -68,6 +69,7 @@ export default class Server {
         this.app.use("/day", dayRouter);
         this.app.use("/promo", promoRouter);
         this.app.use("/user", userRouter);
+        this.app.use("/crm", crmRouter);
         this.app.use(
             "/api-docs",
             swaggerUi.serve,
