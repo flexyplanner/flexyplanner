@@ -31,11 +31,10 @@ export const createOrder = async (req: Request, res: Response) => {
 }
 export const getOffers = async (req: Request, res: Response) => {
      try {
-          const body = {params: {"include":"product"}};
-          const config: any = {headers: {Authorization: `Bearer ${getToken}`}}
-          const response = await axios.get(BASE_URL_OFFERS, body, config);
+          const config: any = {headers: {Authorization: `Bearer ${getToken}`},params: {"include":"product"}}
+          const response = await axios.get(BASE_URL_OFFERS, config);
           console.log(response);
-          return res.status(200).send(response);
+          return res.status(200).send(response.data);
      } catch (err) {
           return res.status(400).send({ err: err });
      }
