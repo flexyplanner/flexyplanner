@@ -33,7 +33,7 @@ export const getOffers = async (req: Request, res: Response) => {
      try {
           const body = {params: {"include":"product"}};
           const config: any = {headers: {Authorization: `Bearer ${getToken}`}}
-          const response = await axios.post(BASE_URL_OFFERS, body, config);
+          const response = await axios.get(BASE_URL_OFFERS, body, config);
           console.log(response);
           return res.status(200).send(response);
      } catch (err) {
