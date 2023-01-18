@@ -11,9 +11,8 @@ export const createLeads = async (req: Request, res: Response) => {
     const body = req.body;
     const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
      try {
-          const response = await axios.post(BASE_URL_LEADS, body, config);
-          console.log(response);
-          // return res.status(200);
+           await axios.post(BASE_URL_LEADS, body, config);
+           return null;
      } catch (err){
           return res.status(400).send({ err: err });
      }
@@ -22,9 +21,8 @@ export const createOrder = async (req: Request, res: Response) => {
      const body = req.body;
      const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
      try {
-          const response = await axios.post(BASE_URL_ORDER, body, config);
-          console.log(response);
-          // return res.status(200);
+          await axios.post(BASE_URL_ORDER, body, config);
+          return null;
      } catch (err){
           return res.status(400).send({ err: err });
      }
@@ -33,7 +31,6 @@ export const getOffers = async (req: Request, res: Response) => {
      try {
           const config: any = {headers: {Authorization: `Bearer ${getToken}`},params: {"include":"product"}}
           const response = await axios.get(BASE_URL_OFFERS, config);
-          console.log(response);
           return res.status(200).send(response.data);
      } catch (err) {
           return res.status(400).send({ err: err });

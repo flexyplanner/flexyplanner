@@ -11,6 +11,7 @@ import dayRouter from "../REST-entities/day/day.router";
 import userRouter from "../REST-entities/user/user.router";
 import promoRouter from "../promo/promo.router"
 import crmRouter from "../crm/crm.router"
+import monoRouter from "../mono/mono.router"
 
 const swaggerDocument = require("../../swagger.json");
 
@@ -70,6 +71,7 @@ export default class Server {
         this.app.use("/promo", promoRouter);
         this.app.use("/user", userRouter);
         this.app.use("/crm", crmRouter);
+        this.app.use("/mono", monoRouter);
         this.app.use(
             "/api-docs",
             swaggerUi.serve,
