@@ -13,3 +13,7 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
         return res.status(400).send({ err: err });
     }
 }
+export const monoWebHook = async (req: Request, res: Response) => {
+    console.log("webhook");
+    return res.status(200).send({ });
+}
