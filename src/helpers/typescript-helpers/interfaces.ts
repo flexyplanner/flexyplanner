@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import {Document, Schema} from "mongoose";
 import { MongoDBObjectId } from "./types";
 
 export interface IMom extends Document {
@@ -83,4 +83,11 @@ export interface IPromo extends Document {
   promo: string,
   period: { from: string, to: string },
   isUsing: boolean | null
+}
+
+export interface IInvoice{
+        invoiceID: string,
+        status: string,
+        id: string,
+        data: string
 }
