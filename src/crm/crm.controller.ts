@@ -12,7 +12,7 @@ export const createLeads = async (req: Request, res: Response) => {
     const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
      try {
            await axios.post(BASE_URL_LEADS, body, config);
-         return null
+         return res.status(200).send({status: "ok"});
      } catch (err){
           return res.status(400).send({ err: err });
      }
