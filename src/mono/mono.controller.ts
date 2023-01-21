@@ -16,11 +16,12 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
         const response = await axios.post("https://api.monobank.ua/api/merchant/invoice/create", body, config);
         const {pageUrl, invoiceId} = response.data;
         res.status(200).send({pageUrl, invoiceId});
+        const date = Date.now();
         await InvoiceModel.create({
             "invoiceID":invoiceId,
             status: "process",
             "id":id,
-            date: Date.now()
+            "data": date
         })
         return
     } catch (err) {
