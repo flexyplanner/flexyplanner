@@ -2,6 +2,8 @@ import {Request, Response, NextFunction} from "express";
 
 const axios = require('axios');
 export const monoInvoiceCreate = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    console.log("Id: ",id);
     const body = req.body;
     const config: any = {headers: {  'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8',
             'Content-Type': 'application/json; charset=UTF-8'}}

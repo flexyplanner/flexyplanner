@@ -4,7 +4,7 @@ import {monoInvoiceCreate,monoWebHook} from "../mono/mono.controller";
 
 const router = Router();
 
-router.post("/",
+router.post("/:id",
     tryCatchWrapper(monoInvoiceCreate)
 );
 router.post("/acquiring/webhook",
