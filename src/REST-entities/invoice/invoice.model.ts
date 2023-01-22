@@ -5,7 +5,7 @@ import {
 
 const invoiceSchema = new Schema(
     {
-        invoiceID: String,
+        invoiceId: String,
         status: String,
         id: String,
     }
