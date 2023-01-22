@@ -40,7 +40,7 @@ export const monoWebHook = async (req: Request, res: Response) => {
             "payment_method_id": 7,
             "payment_method": "Mono-екваєринг",
             "amount": amount/100,
-            "status": status === "success" ? "paid" : "no_paid",
+            "status": status === "success" ? "paid" : "not_paid",
             "description": "Оплата за Flexy planner",
             "payment_date": reference.split(".")[0]
         }
