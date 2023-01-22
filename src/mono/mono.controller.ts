@@ -53,8 +53,8 @@ export const monoWebHook = async (req: Request, res: Response) => {
             case "expired": {
                 try {
                     await axios.post(`https://openapi.keycrm.app/v1/order/${invoice.id}/payment`, request, config);
-                } catch (e) {
-                    console.error(e.data)
+                } catch (e:any) {
+                    console.error(e.response.data)
                 }
             }
 
