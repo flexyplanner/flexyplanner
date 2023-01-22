@@ -17,7 +17,7 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
     try {
         const response = await axios.post("https://api.monobank.ua/api/merchant/invoice/create", body, config);
         const {pageUrl, invoiceId} = response.data;
-
+        console.log("invoice/create response.data: ",response.data);
         await InvoiceModel.create({
             "invoiceId": invoiceId,
             status: null,
