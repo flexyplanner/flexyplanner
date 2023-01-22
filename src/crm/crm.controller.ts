@@ -22,7 +22,7 @@ export const createOrder = async (req: Request, res: Response) => {
      const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
      try {
           const response = await axios.post(BASE_URL_ORDER, body, config);
-          console.log("createOrder: ", response.data);
+          // console.log("createOrder: ", response.data);
          return res.status(200).send(response.data);
      } catch (err){
           return res.status(400).send({ err: err });

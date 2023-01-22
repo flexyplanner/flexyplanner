@@ -86,7 +86,7 @@ export interface IPromo extends Document {
 }
 
 export interface IInvoice{
-        invoiceID: string,
+        invoiceId: string,
         status: string,
         id: string,
 }
