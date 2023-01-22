@@ -30,7 +30,7 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
 }
 export const monoWebHook = async (req: Request, res: Response) => {
     console.log("webhook body: ",req.body);
-    const {invoiceId, status, amount, createdDate} = req.body
+    const {invoiceId, status, amount, reference} = req.body
     const invoice: any = await InvoiceModel.findOne({"invoiceId": `${invoiceId}`}).lean();
     console.log("invoice: ",!!invoice, );
     if (!!invoice) {
@@ -39,10 +39,10 @@ export const monoWebHook = async (req: Request, res: Response) => {
         const request = {
             "payment_method_id": 7,
             "payment_method": "Mono-екваєринг",
-            "amount": amount,
+            "amount": amount/100,
             "status": status === "success" ? "paid" : "no paid",
             "description": "Оплата за Flexy planner",
-            "payment_date": createdDate
+            "payment_date": reference
         }
 
         switch (status) {
