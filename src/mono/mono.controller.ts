@@ -38,7 +38,7 @@ export const monoWebHook = async (req: Request, res: Response) => {
         const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
         const request = {
             "payment_method_id": 7,
-            // "payment_method": "Mono-екваєринг",
+            "payment_method": "Mono-екваєринг",
             "amount": amount,
             "status": status === "success" ? "paid" : "no paid",
             "description": "Оплата за Flexy planner",
@@ -54,14 +54,14 @@ export const monoWebHook = async (req: Request, res: Response) => {
                 try {
                     await axios.post(`https://openapi.keycrm.app/v1/order/${invoice.id}/payment`, request, config);
                 } catch (e) {
-                    console.error(e)
+                    console.error(e.data)
                 }
             }
 
             case "reversed": {
             }
         }
-        if (status === "reversed" || status === "success" || status === "expired") {
+        if (status === "reversed" || status === "success" || status === "expired" || "failure") {
             console.log("delete: id ", invoice.id);
             // await InvoiceModel.findOneAndDelete({"_id": `${invoice._id}`}).lean();
         }
