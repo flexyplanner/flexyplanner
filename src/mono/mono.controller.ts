@@ -44,7 +44,7 @@ export const monoWebHook = async (req: Request, res: Response) => {
             "description": "Оплата за Flexy planner",
             "payment_date": reference.split(".")[0]
         }
-
+        console.log("request CRM: ",request);
         switch (status) {
             case "processing":
             case "hold":
