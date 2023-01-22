@@ -4,6 +4,7 @@ import InvoiceModel from "../REST-entities/invoice/invoice.model";
 const axios = require('axios');
 const postToken = "MDM2MDY1YmZiNmQ2ZTVkY2M0MmUzNDIzYTEwNjMwYmQ3ZWFjNmEzYQ"
 export const monoInvoiceCreate = async (req: Request, res: Response) => {
+    console.log("monoInvoiceCreate: ",req);
     const id = req.params.id;
     const body = req.body;
     const config: any = {
@@ -27,8 +28,8 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
     }
 }
 export const monoWebHook = async (req: Request, res: Response) => {
-    console.log("webhook: ");
-    console.log("req.body:", req.body)
+    console.log("webhook body: ",req.body);
+
     const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
     const {invoiceId, status, amount, createDate} = req.body
     const invoice: any = await InvoiceModel.findOne({"invoiceId": `${invoiceId}`}).lean();
@@ -41,8 +42,8 @@ export const monoWebHook = async (req: Request, res: Response) => {
         "description": "Оплата за Flexy planner",
         "payment_date": createDate
     }
-    console.log("invoice: ",invoice)
-    console.log("request: ",request)
+    // console.log("invoice: ",invoice)
+    // console.log("request: ",request)
     switch (status) {
         case "processing":
         case "hold":
