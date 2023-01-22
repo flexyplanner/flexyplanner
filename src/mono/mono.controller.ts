@@ -4,9 +4,10 @@ import InvoiceModel from "../REST-entities/invoice/invoice.model";
 const axios = require('axios');
 const postToken = "MDM2MDY1YmZiNmQ2ZTVkY2M0MmUzNDIzYTEwNjMwYmQ3ZWFjNmEzYQ"
 export const monoInvoiceCreate = async (req: Request, res: Response) => {
-    console.log("monoInvoiceCreate: ",req);
     const id = req.params.id;
     const body = req.body;
+    console.log("req.params.id: ",id);
+    console.log("req.body: ",body);
     const config: any = {
         headers: {
             'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8',
