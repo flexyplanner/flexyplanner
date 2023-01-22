@@ -42,7 +42,7 @@ export const monoWebHook = async (req: Request, res: Response) => {
             "amount": amount,
             "status": status === "success" ? "paid" : "no paid",
             "description": "Оплата за Flexy planner",
-            "payment_date": createDate
+            "payment_date": createdDate
         }
 
         switch (status) {
