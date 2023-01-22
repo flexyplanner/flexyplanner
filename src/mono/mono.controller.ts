@@ -30,7 +30,7 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
 }
 export const monoWebHook = async (req: Request, res: Response) => {
     console.log("webhook body: ",req.body);
-    const {invoiceId, status, amount, createDate} = req.body
+    const {invoiceId, status, amount, createdDate} = req.body
     const invoice: any = await InvoiceModel.findOne({"invoiceId": `${invoiceId}`}).lean();
     console.log("invoice: ",!!invoice, );
     if (!!invoice) {
