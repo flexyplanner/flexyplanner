@@ -44,28 +44,28 @@ export const monoWebHook = async (req: Request, res: Response) => {
             "description": "Оплата за Flexy planner",
             "payment_date": createDate
         }
-        // // console.log("invoice: ",invoice)
-        // // console.log("request: ",request)
-        // switch (status) {
-        //     case "processing":
-        //     case "hold":
-        //     case "created":
-        //     case "success":
-        //     case "expired": {
-        //         try {
-        //             await axios.post(`https://openapi.keycrm.app/v1/order/${invoice.id}/payment}`, request, config);
-        //         } catch (e) {
-        //             console.error(e)
-        //         }
-        //     }
-        //
-        //     case "reversed": {
-        //     }
-        // }
-        // if (request.status === "paid") {
-        //     // await InvoiceModel.findOneAndDelete({"_id": `${invoice._id}`}).lean();
-        // }
-        // // console.log("invoice: ", invoice);
-        // return res.status(200).send({});
+
+        switch (status) {
+            case "processing":
+            case "hold":
+            case "created":
+            case "success":
+            case "expired": {
+                try {
+                    await axios.post(`https://openapi.keycrm.app/v1/order/${invoice.id}/payment}`, request, config);
+                } catch (e) {
+                    console.error(e)
+                }
+            }
+
+            case "reversed": {
+            }
+        }
+        if (status === "reversed" || status === "success" || status === "expired") {
+            console.log("delete: id ", invoice.id);
+            // await InvoiceModel.findOneAndDelete({"_id": `${invoice._id}`}).lean();
+        }
+        // console.log("invoice: ", invoice);
+        return res.status(200).send({});
     }
 }
