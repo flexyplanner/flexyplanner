@@ -8,8 +8,7 @@ const invoiceSchema = new Schema(
         invoiceID: String,
         status: String,
         id: String,
-        data: String
     }
 );
 
-export default mongoose.model<IInvoice>("Invoice", invoiceSchema);
+export default mongoose.model<IInvoice>("Invoices", invoiceSchema);

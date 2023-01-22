@@ -89,5 +89,4 @@ export interface IInvoice{
         invoiceID: string,
         status: string,
         id: string,
-        data: string
 }
