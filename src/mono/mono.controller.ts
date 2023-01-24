@@ -64,7 +64,7 @@ export const monoWebHook = async (req: Request, res: Response) => {
         if (status === "reversed" || status === "success" || status === "expired" || status ==="failure") {
             console.log("delete: id ", invoice.id);
             if (!!invoice.id) {
-                await InvoiceModel.findOneAndDelete({"_id": `${invoice._id}`}).lean();
+                // await InvoiceModel.findOneAndDelete({"_id": `${invoice._id}`}).lean();
             }
         }
         // console.log("invoice: ", invoice);
