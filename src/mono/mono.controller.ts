@@ -10,15 +10,16 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
     // console.log("req.body: ",body);
     const config: any = {
         headers: {
-            // 'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8',
-            'X-Token': 'mXvWdWkZHoTjW4TpK3qFyJw',
+            'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8',
+            // 'X-Token': 'mXvWdWkZHoTjW4TpK3qFyJw',
             'Content-Type': 'application/json; charset=UTF-8'
         }
     }
     try {
         const response = await axios.post("https://api.monobank.ua/api/merchant/invoice/create", body, config);
         const {pageUrl, invoiceId} = response.data;
-        // console.log("invoice/create response.data: ",response.data);
+        console.log("invoice/create mono.response: ",response.data);
+
         await InvoiceModel.create({
             "invoiceId": invoiceId,
             status: null,
