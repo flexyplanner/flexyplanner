@@ -56,7 +56,7 @@ export default class Server {
                 useFindAndModify: false,
                 useCreateIndex: true,
             });
-            console.log("Database connection is successful");
+            console.log("Database connection is successful...");
         } catch (error) {
             console.log("Database connection failed", error);
             process.exit(1);
