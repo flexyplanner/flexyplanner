@@ -170,6 +170,7 @@ const refreshTokens = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.refreshTokens = refreshTokens;
 const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const currentSession = req.session;
+    console.log(currentSession);
     yield session_model_1.default.deleteOne({ _id: currentSession._id });
     return res.status(204).end();
 });

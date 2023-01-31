@@ -24,9 +24,12 @@ const product_search_router_1 = __importDefault(require("../product-search/produ
 const day_router_1 = __importDefault(require("../REST-entities/day/day.router"));
 const user_router_1 = __importDefault(require("../REST-entities/user/user.router"));
 const promo_router_1 = __importDefault(require("../promo/promo.router"));
+const crm_router_1 = __importDefault(require("../crm/crm.router"));
+const mono_router_1 = __importDefault(require("../mono/mono.router"));
 const swaggerDocument = require("../../swagger.json");
 class Server {
     constructor() {
+        this.i = 0;
         this.app = (0, express_1.default)();
     }
     start() {
@@ -36,6 +39,7 @@ class Server {
             this.initRoutes();
             this.initErrorHandling();
             this.initListening();
+            // this.ttt();
         });
     }
     startForTesting() {
@@ -44,9 +48,15 @@ class Server {
         this.initErrorHandling();
         return this.app;
     }
+    // private ttt(){
+    //     setInterval(() => {
+    //         this.i = this.i+1;
+    //         console.log(this.i);
+    //     }, 60000);
+    // }
     initMiddlewares() {
         this.app.use(express_1.default.json());
-        this.app.use((0, cors_1.default)({ origin: process.env.ALLOWED_ORIGIN }));
+        this.app.use((0, cors_1.default)());
     }
     initDbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -57,7 +67,7 @@ class Server {
                     useFindAndModify: false,
                     useCreateIndex: true,
                 });
-                console.log("Database connection is successful");
+                console.log("Database connection is successful...");
             }
             catch (error) {
                 console.log("Database connection failed", error);
@@ -72,6 +82,8 @@ class Server {
         this.app.use("/day", day_router_1.default);
         this.app.use("/promo", promo_router_1.default);
         this.app.use("/user", user_router_1.default);
+        this.app.use("/crm", crm_router_1.default);
+        this.app.use("/mono", mono_router_1.default);
         this.app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
     }
     initErrorHandling() {

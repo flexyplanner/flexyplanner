@@ -17,5 +17,5 @@ router.get("/",
 // validate(searchQuerySchema, "query"),
 (0, try_catch_wrapper_1.default)(product_search_controller_1.findProducts));
 router.patch("/", (0, try_catch_wrapper_1.default)(product_search_controller_1.switchMarkupStatus));
-router.post("/", (0, try_catch_wrapper_1.default)(product_search_controller_1.switchMarkupModify));
+router.put("/", (0, try_catch_wrapper_1.default)(product_search_controller_1.markupModify));
 exports.default = router;
