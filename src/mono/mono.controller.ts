@@ -34,7 +34,7 @@ export const monoWebHook = async (req: Request, res: Response) => {
     // console.log("webhook body: ",req.body);
     const {invoiceId, status, amount, reference} = req.body
     const invoice: any = await InvoiceModel.findOne({"invoiceId": `${invoiceId}`}).lean();
-    console.log("invoice: ",invoice, );
+    console.log("invoice: ",!!invoice, );
     if (!!invoice ) {
         const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
         const request = {
@@ -55,7 +55,7 @@ export const monoWebHook = async (req: Request, res: Response) => {
                 try {
                     await axios.post(`https://openapi.keycrm.app/v1/order/${invoice.id}/payment`, request, config);
                 } catch (e:any) {
-                    console.error("monoWebHook:\n",`https://openapi.keycrm.app/v1/order/${invoice.id}/payment\n`,e.response.data)
+                    console.error(e.response.data)
                 }
             }
 
