@@ -6,8 +6,9 @@ const postToken = "MjA3NDhmMzYyY2M3YjlkNDlhZTZiZDAyYzcyMWY2YWUxOGIxNTY2OA"
 export const monoInvoiceCreate = async (req: Request, res: Response) => {
     const id = req.params.id;
     const body = req.body;
-    // console.log("req.params.id: ",id);
-    // console.log("req.body: ",body);
+    console.log("/mono/:id -- monoInvoiceCreate")
+    console.log("req.params.id: ",id);
+    console.log("req.body: ",body);
     const config: any = {
         headers: {
             // 'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8',
