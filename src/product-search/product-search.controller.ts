@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import MarkupModel from "../REST-entities/product/product.model";
 
 export const findProducts = async (req: Request, res: Response) => {
-
+  console.log("findProducts");
   const foundProducts = await MarkupModel.findOne({is_Active: true}).select({_id: 0}).lean();
   if (!foundProducts) {
     return res
