@@ -11,8 +11,8 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
     console.log("req.body: ",body);
     const config: any = {
         headers: {
-            'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8', // тестовый
-            // 'X-Token': 'mXvWdWkZHoTjW4TpK3qFyJw',                         // продакшин
+            // 'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8', // тестовый
+            'X-Token': 'mXvWdWkZHoTjW4TpK3qFyJw',                         // продакшин
             'Content-Type': 'application/json; charset=UTF-8'
         }
     }
