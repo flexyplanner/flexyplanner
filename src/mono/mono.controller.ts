@@ -9,26 +9,30 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
     console.log("/mono/:id -- monoInvoiceCreate")
     console.log("req.params.id: ",id);
     console.log("req.body: ",body);
-    const config: any = {
-        headers: {
-            // 'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8', // тестовый
-            'X-Token': 'mXvWdWkZHoTjW4TpK3qFyJw',                         // продакшин
-            'Content-Type': 'application/json; charset=UTF-8'
+    if (id) {
+        const config: any = {
+            headers: {
+                // 'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8', // тестовый
+                'X-Token': 'mXvWdWkZHoTjW4TpK3qFyJw',                         // продакшин
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
         }
-    }
-    try {
-        const response = await axios.post("https://api.monobank.ua/api/merchant/invoice/create", body, config);
-        const {pageUrl, invoiceId} = response.data;
-        console.log("invoice/create mono.response: ",response.data);
+        try {
+            const response = await axios.post("https://api.monobank.ua/api/merchant/invoice/create", body, config);
+            const {pageUrl, invoiceId} = response.data;
+            console.log("invoice/create mono.response: ", response.data);
 
-        await InvoiceModel.create({
-            "invoiceId": invoiceId,
-            status: null,
-            "id": id,
-        })
-        return res.status(200).send({pageUrl, invoiceId});
-    } catch (err) {
-        return res.status(400).send({err: err});
+            await InvoiceModel.create({
+                "invoiceId": invoiceId,
+                status: null,
+                "id": id,
+            })
+            return res.status(200).send({pageUrl, invoiceId});
+        } catch (err) {
+            return res.status(400).send({err: err});
+        }
+    } else {
+        return res.status(400).send({err:'bad ID'})
     }
 }
 export const monoWebHook = async (req: Request, res: Response) => {
