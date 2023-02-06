@@ -39,7 +39,11 @@ export const monoWebHook = async (req: Request, res: Response) => {
     // console.log("webhook body: ",req.body);
     const {invoiceId, status, amount, reference} = req.body
     const invoice: any = await InvoiceModel.findOne({"invoiceId": `${invoiceId}`}).lean();
-    // console.log("invoice: ",invoice );
+    const webhook_status = {
+          invoiceId,
+         status
+    }
+    console.log('webhook_status :',webhook_status);
     if (!!invoice ) {
         const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
         const request = {
@@ -75,5 +79,5 @@ export const monoWebHook = async (req: Request, res: Response) => {
         }
         // console.log("invoice: ", invoice);
         return res.status(200).send({});
-    }
+    } return res.status(200).send({})
 }
