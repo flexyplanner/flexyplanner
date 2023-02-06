@@ -3,13 +3,13 @@ import InvoiceModel from "../REST-entities/invoice/invoice.model";
 
 const axios = require('axios');
 const postToken = "MjA3NDhmMzYyY2M3YjlkNDlhZTZiZDAyYzcyMWY2YWUxOGIxNTY2OA"
-export const monoInvoiceCreate = async (req: Request, res: Response) => {
+export const monoInvoiceCreate = async (req: Request, res: Response,counter = 0) => {
     const id = req.params.id;
     const body = req.body;
-    console.log("/mono/:id -- monoInvoiceCreate")
+    console.log("/mono/:id -- monoInvoiceCreate. counter: ",counter)
     console.log("req.params.id: ",id);
     console.log("req.body: ",body);
-    if (id) {
+    if (!!id) {
         const config: any = {
             headers: {
                 // 'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8', // тестовый
@@ -29,6 +29,10 @@ export const monoInvoiceCreate = async (req: Request, res: Response) => {
             })
             return res.status(200).send({pageUrl, invoiceId});
         } catch (err) {
+            if (counter<3){
+                counter = counter+1;
+                await monoInvoiceCreate(req, res, counter);
+            }
             return res.status(400).send({err: err});
         }
     } else {
