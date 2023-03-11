@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.markupModify = exports.switchMarkupStatus = exports.findProducts = void 0;
 const product_model_1 = __importDefault(require("../REST-entities/product/product.model"));
 const findProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("findProducts");
+    console.log("findProducts allProducts {is_Active: true}");
     const foundProducts = yield product_model_1.default.findOne({ is_Active: true }).select({ _id: 0 }).lean();
     if (!foundProducts) {
         return res

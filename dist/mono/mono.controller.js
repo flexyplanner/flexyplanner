@@ -22,26 +22,31 @@ const monoInvoiceCreate = (req, res) => __awaiter(void 0, void 0, void 0, functi
     console.log("/mono/:id -- monoInvoiceCreate");
     console.log("req.params.id: ", id);
     console.log("req.body: ", body);
-    const config = {
-        headers: {
-            // 'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8',
-            'X-Token': 'mXvWdWkZHoTjW4TpK3qFyJw',
-            'Content-Type': 'application/json; charset=UTF-8'
+    if (!!id) {
+        const config = {
+            headers: {
+                // 'X-Token': 'ugAI3yR-ILBoA2FEZ_C0fZ1l_sERRYPCaL7enjvjHHE8', // тестовый
+                'X-Token': 'mXvWdWkZHoTjW4TpK3qFyJw',
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        };
+        try {
+            const response = yield axios.post("https://api.monobank.ua/api/merchant/invoice/create", body, config);
+            const { pageUrl, invoiceId } = response.data;
+            console.log("invoice/create mono.response: ", response.data);
+            yield invoice_model_1.default.create({
+                "invoiceId": invoiceId,
+                status: null,
+                "id": id,
+            });
+            return res.status(200).send({ pageUrl, invoiceId });
         }
-    };
-    try {
-        const response = yield axios.post("https://api.monobank.ua/api/merchant/invoice/create", body, config);
-        const { pageUrl, invoiceId } = response.data;
-        console.log("invoice/create mono.response: ", response.data);
-        yield invoice_model_1.default.create({
-            "invoiceId": invoiceId,
-            status: null,
-            "id": id,
-        });
-        return res.status(200).send({ pageUrl, invoiceId });
+        catch (err) {
+            return res.status(400).send({ err: err });
+        }
     }
-    catch (err) {
-        return res.status(400).send({ err: err });
+    else {
+        return res.status(400).send({ err: 'bad ID' });
     }
 });
 exports.monoInvoiceCreate = monoInvoiceCreate;
@@ -49,7 +54,11 @@ const monoWebHook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     // console.log("webhook body: ",req.body);
     const { invoiceId, status, amount, reference } = req.body;
     const invoice = yield invoice_model_1.default.findOne({ "invoiceId": `${invoiceId}` }).lean();
-    // console.log("invoice: ",!!invoice, );
+    const webhook_status = {
+        invoiceId,
+        status
+    };
+    console.log('webhook_status :', webhook_status);
     if (!!invoice) {
         const config = { headers: { Authorization: `Bearer ${postToken}` } };
         const request = {
@@ -86,5 +95,6 @@ const monoWebHook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         // console.log("invoice: ", invoice);
         return res.status(200).send({});
     }
+    return res.status(200).send({});
 });
 exports.monoWebHook = monoWebHook;
