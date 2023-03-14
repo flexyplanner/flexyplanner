@@ -39,6 +39,7 @@ export const createPromo = async (req: Request, res: Response) => {
     }
 }
 export const getPromo = async (req: Request, res: Response) => {
+    console.log("getPromo")
     let promo: any = [];
     if (req.query?.promo) {
         const query = {promo: req.query["promo"].toString()};

@@ -19,6 +19,7 @@ export const createLeads = async (req: Request, res: Response) => {
      }
 }
 export const createOrder = async (req: Request, res: Response) => {
+    console.log(req)
      const body = req.body;
      const config: any = {headers: {Authorization: `Bearer ${postToken}`}}
      try {
