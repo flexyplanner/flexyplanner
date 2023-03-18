@@ -22,6 +22,7 @@ router.get("/",
 router.patch("/",
     tryCatchWrapper(switchPromoStatus)
 );
+
 router.delete("/",
     tryCatchWrapper(deletePromo)
 );

@@ -62,11 +62,14 @@ export const switchPromoStatus = async (req: Request, res: Response) => {
     }
     return res.status(404).send("err");
 }
+
 export const deletePromo = async (req: Request, res: Response) => {
-    if (req.body.promocode) {
+    console.log(req.body)
+    if (req.body?.promocode) {
         const {promocode} = req.body
         const query = {promo: promocode};
         const dbreq = await PromocodesModel.deleteOne(query);
+        console.log(dbreq)
         return res.status(200).send(dbreq);
     } else {
         return res.status(404).send("err");
