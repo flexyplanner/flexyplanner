@@ -65,9 +65,16 @@ export const switchPromoStatus = async (req: Request, res: Response) => {
 
 export const deletePromo = async (req: Request, res: Response) => {
     console.log(req.body)
+    let query;
     if (req.body?.promocode) {
         const {promocode} = req.body
-        const query = {promo: promocode};
+         query = {promo: promocode};
+    }
+    if (req.body?._id) {
+        const {_id} = req.body
+        query = {_id: _id};
+    }
+    if (!!query){
         const dbreq = await PromocodesModel.deleteOne(query);
         console.log(dbreq)
         return res.status(200).send(dbreq);

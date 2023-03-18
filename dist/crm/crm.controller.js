@@ -30,6 +30,7 @@ const createLeads = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.createLeads = createLeads;
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req);
     const body = req.body;
     const config = { headers: { Authorization: `Bearer ${postToken}` } };
     try {

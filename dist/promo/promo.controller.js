@@ -56,6 +56,7 @@ const createPromo = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.createPromo = createPromo;
 const getPromo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
+    console.log("getPromo");
     let promo = [];
     if ((_a = req.query) === null || _a === void 0 ? void 0 : _a.promo) {
         const query = { promo: req.query["promo"].toString() };
@@ -82,10 +83,20 @@ const switchPromoStatus = (req, res) => __awaiter(void 0, void 0, void 0, functi
 });
 exports.switchPromoStatus = switchPromoStatus;
 const deletePromo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    if (req.body.promocode) {
+    var _b, _c;
+    console.log(req.body);
+    let query;
+    if ((_b = req.body) === null || _b === void 0 ? void 0 : _b.promocode) {
         const { promocode } = req.body;
-        const query = { promo: promocode };
+        query = { promo: promocode };
+    }
+    if ((_c = req.body) === null || _c === void 0 ? void 0 : _c._id) {
+        const { _id } = req.body;
+        query = { _id: _id };
+    }
+    if (!!query) {
         const dbreq = yield promocodes_model_1.default.deleteOne(query);
+        console.log(dbreq);
         return res.status(200).send(dbreq);
     }
     else {

@@ -23,6 +23,7 @@ const daily_rate_router_1 = __importDefault(require("../daily-rate/daily-rate.ro
 const product_search_router_1 = __importDefault(require("../product-search/product-search.router"));
 const day_router_1 = __importDefault(require("../REST-entities/day/day.router"));
 const user_router_1 = __importDefault(require("../REST-entities/user/user.router"));
+const report_router_1 = __importDefault(require("../report/report.router"));
 const promo_router_1 = __importDefault(require("../promo/promo.router"));
 const crm_router_1 = __importDefault(require("../crm/crm.router"));
 const mono_router_1 = __importDefault(require("../mono/mono.router"));
@@ -81,6 +82,7 @@ class Server {
         this.app.use("/markup", product_search_router_1.default);
         this.app.use("/day", day_router_1.default);
         this.app.use("/promo", promo_router_1.default);
+        this.app.use("/report", report_router_1.default);
         this.app.use("/user", user_router_1.default);
         this.app.use("/crm", crm_router_1.default);
         this.app.use("/mono", mono_router_1.default);
