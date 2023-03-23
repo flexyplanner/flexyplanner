@@ -31,9 +31,16 @@ const createReport = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.createReport = createReport;
 const promoTable = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // console.log(req.body)
-    const promo = yield promocodes_model_1.default.find({}).skip((req.body.page - 1) * req.body.count).limit(req.body.count);
-    return res.status(200).send(promo);
+    var _a, _b;
+    let count;
+    const promo = yield promocodes_model_1.default.find((_a = req === null || req === void 0 ? void 0 : req.body) === null || _a === void 0 ? void 0 : _a.filter).skip((req.body.page - 1) * req.body.count).limit(req.body.count);
+    if ((_b = req === null || req === void 0 ? void 0 : req.body) === null || _b === void 0 ? void 0 : _b.filter) {
+        count = Object.keys(promo).length;
+    }
+    else {
+        count = yield promocodes_model_1.default.countDocuments();
+    }
+    return res.status(200).send({ promo, count });
 });
 exports.promoTable = promoTable;
 const updatePromo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

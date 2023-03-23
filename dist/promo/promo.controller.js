@@ -36,7 +36,7 @@ const createPromo = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const new_promos = codes.map((code) => {
         return {
             discount: discount,
-            isUsing: null,
+            isUsing: false,
             promo: code,
             "type": type,
             period: type === "Common" ? {

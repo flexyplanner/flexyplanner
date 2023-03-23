@@ -21,9 +21,14 @@ export const createReport  = async (req: Request, res: Response) => {
 
 export const promoTable  = async (req: Request, res: Response) => {
 
-// console.log(req.body)
-    const count = await PromocodesModel.count();
-    const promo = await PromocodesModel.find({}).skip((req.body.page-1)*req.body.count).limit(req.body.count);
+
+    let count;
+    const promo = await PromocodesModel.find(req?.body?.filter).skip((req.body.page-1)*req.body.count).limit(req.body.count);
+        if (req?.body?.filter) {
+            count = Object.keys(promo).length
+        }else{
+             count = await PromocodesModel.countDocuments();
+        }
     return res.status(200).send({promo,count})
 }
 

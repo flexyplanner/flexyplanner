@@ -22,7 +22,7 @@ export const createPromo = async (req: Request, res: Response) => {
     const new_promos = codes.map((code: string) => {
         return {
             discount: discount,
-            isUsing: null,
+            isUsing: false,
             promo: code,
             "type": type,
             period: type === "Common"?{
